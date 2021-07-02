@@ -6,24 +6,29 @@ import axios from 'axios'
 //     'Bearer 03e6172e4bc61c0101ae952fe696d818';
 
 const API_KEY = '03e6172e4bc61c0101ae952fe696d818'
-
+const BASE_URL = 'https://api.themoviedb.org/3/'
 const fetchMovies = () => {
     return axios
         .get(
-            `https://api.themoviedb.org/3/trending/movie/day?api_key=${API_KEY}`
+            `${BASE_URL}trending/movie/day?api_key=${API_KEY}`
         )
 }
 
 const fetchMovieId = (movieId) => {
     return axios
-        .get(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}&language=en-US`
+        .get(`${BASE_URL}movie/${movieId}?api_key=${API_KEY}&language=en-US`
         
     )
 }
 
 const fetchMoviesQuery = (query) => {
     return axios
-        .get(`https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`)
+        .get(`${BASE_URL}search/movie?api_key=${API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`)
 }
 
-export {fetchMovies, fetchMovieId, fetchMoviesQuery}
+const fetchInfo = (movieId, category) => {
+    return axios
+    .get(`${BASE_URL}movie/${movieId}/${category}?api_key=${API_KEY}&language=en-US`)
+}
+
+export {fetchMovies, fetchMovieId, fetchMoviesQuery, fetchInfo}

@@ -1,8 +1,8 @@
 import { Component } from "react";
 import { fetchMoviesQuery } from "../service/service";
-import { NavLink } from "react-router-dom";
+import MoviesList from "../components/MoviesList";
 
-export class Movies extends Component {
+class MoviesView extends Component {
     state = {
         value: null,
         movies: null
@@ -16,19 +16,21 @@ export class Movies extends Component {
      handelSubmit = (e) => {
         e.preventDefault()
         fetchMoviesQuery(this.state.value).then(res => this.setState({movies: res.data.results}))
-        // this.setState({movies: [...response]})
+        
     }
 
     render() {
+        const {movies} = this.state
         return (
             <>
                 <form onSubmit={this.handelSubmit}>
                     <input type="text" onChange={this.handelChange}/>
                     <button type="submit">Search</button>
                 </form>
-                <ul>
-                    {this.state.movies && this.state.movies.map(movie => <li key={movie.id}><NavLink to={`/movies/${movie.id}`}>{movie.title}</NavLink></li>)}
-                </ul>
-            </>)
+                {movies && <MoviesList movies={movies} />}
+            </>
+        )
+    }
 }
-}
+
+export default MoviesView;

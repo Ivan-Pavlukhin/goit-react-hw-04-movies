@@ -1,8 +1,8 @@
 import { Component } from 'react'
 import {fetchMovies} from '../service/service'
-import {Link} from 'react-router-dom'
+import MoviesList from '../components/MoviesList'
 
-export class HomePage extends Component {
+ class HomePageView extends Component {
     state = {
         movies: null
     }
@@ -11,16 +11,16 @@ export class HomePage extends Component {
             .then(data => this.setState({ movies: data.data.results }))
     }
 
-    render() {
+     render() {
+        const {movies} = this.state 
         return (
             <div>
                 <h1>Trending today</h1>
-                <ul>
-                    {this.state.movies && this.state.movies.map(movie => (<li key={movie.id}><Link to={`/movies/${movie.id}`} >{movie.title}</Link></li>))}
-                </ul>
+
+                {movies && <MoviesList movies={movies} />}
             </div>
         )
     }
 }
 
-// 03e6172e4bc61c0101ae952fe696d818
+export default HomePageView

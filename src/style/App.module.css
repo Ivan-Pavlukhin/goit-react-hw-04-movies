@@ -1,0 +1,15 @@
+.wrapper {
+  width: 1170px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+
+  padding-bottom: 80px;
+}
+
+.header__link {
+  display: inline-block;
+  margin-right: 5px;
+  padding: 3px;
+}
