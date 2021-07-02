@@ -5,7 +5,9 @@ import MoviesList from "../components/MoviesList";
 class MoviesView extends Component {
     state = {
         value: null,
-        movies: null
+        movies: null,
+        loading: false,
+        error: null
     }
 
     handelChange = (e) => {
@@ -14,19 +16,24 @@ class MoviesView extends Component {
     }
 
      handelSubmit = (e) => {
-        e.preventDefault()
-        fetchMoviesQuery(this.state.value).then(res => this.setState({movies: res.data.results}))
+         e.preventDefault()
+         this.setState({loading: true})
+         fetchMoviesQuery(this.state.value)
+            .then(res => this.setState({ movies: res.data.results }))
+            .catch(error => this.setState({ error: error }))
+            .finally(() => this.setState({loading: false}))
         
     }
 
     render() {
-        const {movies} = this.state
+        const {movies, loading} = this.state
         return (
             <>
                 <form onSubmit={this.handelSubmit}>
                     <input type="text" onChange={this.handelChange}/>
                     <button type="submit">Search</button>
                 </form>
+                {loading && <p>Загружаем</p>}
                 {movies && <MoviesList movies={movies} />}
             </>
         )
