@@ -79,13 +79,13 @@ const POSTER_URL = 'https://image.tmdb.org/t/p/original'
                 <li>
                   <Link to={{
                     pathname: `${match.url}/credits`,
-                    state: { from: location }
+                    state: { from: location.state.from }
                   }}  >Cast</Link>
                 </li>
                 <li>
                   <Link to={{
                     pathname: `${match.url}/reviews`,
-                    state: { from: location }
+                    state: { from: location.state.from }
                   }}>Reviews</Link>
                 </li>
             </ul>
