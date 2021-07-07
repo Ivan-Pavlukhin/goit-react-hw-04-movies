@@ -1,9 +1,5 @@
-// 03e6172e4bc61c0101ae952fe696d818
-
 import axios from 'axios'
 
-// axios.defaults.headers.common['Autorization'] =
-//     'Bearer 03e6172e4bc61c0101ae952fe696d818';
 
 const API_KEY = '03e6172e4bc61c0101ae952fe696d818'
 const BASE_URL = 'https://api.themoviedb.org/3/'

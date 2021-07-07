@@ -2,7 +2,6 @@ import queryString from 'query-string';
 import { Component } from "react";
 import { fetchMoviesQuery } from "../service/service";
 import MoviesList from "../components/MoviesList";
-import { NavLink, Route } from "react-router-dom";
 
 class MoviesView extends Component {
     state = {
@@ -12,11 +11,8 @@ class MoviesView extends Component {
         error: null
     }
 
-    
-
     componentDidMount() {
         const queryParams = queryString.parse(this.props.location.search);
-        console.log(queryParams)
         if (this.props.location.search) {
             this.setState({value: queryParams.query})
             this.fetchMovies(queryParams.query)
@@ -28,10 +24,12 @@ class MoviesView extends Component {
         this.setState({value: e.currentTarget.value})
     }
 
-     handelSubmit = (e) => {
+    handelSubmit = (e) => {
+         e.preventDefault()
          if (this.state.value) {
              this.setState({ loading: true })
              this.fetchMovies(this.state.value)
+            this.props.history.push(`${this.props.match.url}?query=${this.state.value}`)  
          }
         
     }
@@ -43,14 +41,17 @@ class MoviesView extends Component {
     }
 
     render() {
-        const {movies, loading, value} = this.state
+        const { movies, loading, value } = this.state
         return (
             <>
-                <input type="text" onChange={this.handelChange}/>
-                <NavLink to={`${this.props.match.url}?query=${this.state.value}`}
-                onClick={this.handelSubmit}>Search</NavLink>
+                <form onSubmit={this.handelSubmit}>
+                    <input type="text" onChange={this.handelChange}/>
+                    <button type="submit">Search</button>
+                </form>
+
                 {loading && <p>Загружаем</p>}
-                {movies && <MoviesList movies={movies} query={value}/>}
+
+                {movies && <MoviesList movies={movies} value={value}/>} 
             </>
         )
     }

@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { Link, Route } from 'react-router-dom';
-import { fetchMovieId, fetchMoviesQuery } from '../service/service';
+import { fetchMovieId } from '../service/service';
 import { Cast } from '../components/Cast';
 import { Reviews } from '../components/Reviews'
 

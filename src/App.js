@@ -18,7 +18,7 @@ const App = () => (
     <Suspense fallback={<h1>Загрузка</h1>}>
     <Switch>
       <Route path="/movies/:movieId" component={MovieDetailsView} />
-      <Route path="/movies" component={MoviesView} />
+      <Route path="/movies" exact component={MoviesView} />
       <Route path="/" component={HomePageView} />
       <Redirect to="/" />
     </Switch>
