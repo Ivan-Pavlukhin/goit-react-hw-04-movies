@@ -7,7 +7,6 @@ class MoviesList extends Component {
         return (
             <>
                 <ul>
-                <p>list</p>
                     {this.props.movies && this.props.movies.map(movie => <li key={movie.id}>
                         <NavLink to={{
                             pathname: `/movies/${movie.id}`,
